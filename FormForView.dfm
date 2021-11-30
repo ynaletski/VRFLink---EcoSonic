@@ -1,0 +1,64 @@
+object FormForVariablesView: TFormForVariablesView
+  Left = 332
+  Top = 336
+  BorderStyle = bsDialog
+  Caption = 'FormForVariablesView'
+  ClientHeight = 331
+  ClientWidth = 622
+  Color = clBtnFace
+  DragMode = dmAutomatic
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnResize = FormResize
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 544
+    Top = 8
+    Width = 32
+    Height = 16
+    Picture.Data = {
+      07544269746D617076010000424D760100000000000076000000280000002000
+      000010000000010004000000000000010000130B0000130B0000100000000000
+      0000000000000000800000800000008080008000000080008000808000007F7F
+      7F00BFBFBF000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFF
+      FF0033333333333333333333333333333333EEEEEEEEEEEEEEE333FFFFFFFFFF
+      FFF3E0000000000000E337777777777777F3E0F77777777770E337F333333333
+      37F3E0F33333333370E337F33333333337F3E0F33333333370E337F333F333FF
+      37F3E0F33033300370E337F337FF377F37F3E0F33003300370E337F3377FF77F
+      37F3E0F33000300370E337F33777377F37F3E0F33003300370E337F33773377F
+      37F3E0F33033300370E337F33733377337F3E0F33333333370E337F333333333
+      37F3E0F33333333370E337F33333333337F3E0FFFFFFFFFFF0E337FFFFFFFFFF
+      F7F3E0000000000000E33777777777777733EEEEEEEEEEEEEEE3333333333333
+      3333}
+    Visible = False
+  end
+  object sgTable: TStringGrid
+    Left = 0
+    Top = 0
+    Width = 610
+    Height = 331
+    BorderStyle = bsNone
+    ColCount = 4
+    DefaultColWidth = 128
+    DefaultRowHeight = 21
+    FixedColor = 14215660
+    FixedCols = 0
+    RowCount = 51
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    ScrollBars = ssVertical
+    TabOrder = 0
+    OnDrawCell = sgTableDrawCell
+  end
+end

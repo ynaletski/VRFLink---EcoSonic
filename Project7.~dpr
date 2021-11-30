@@ -1,0 +1,29 @@
+program Project7;
+
+uses
+  Forms,
+  Main in 'Main.pas' {MainForm},
+  ConfigurationSettings in 'ConfigurationSettings.pas' {FormConfigurationSettings},
+  EcoSonicSettings in 'EcoSonicSettings.pas' {Form3},
+  FormForView in 'FormForView.pas' {Form4},
+  InOutModulesSetting in 'InOutModulesSetting.pas' {Form6},
+  ModbusSetting in 'ModbusSetting.pas' {Form5},
+  script in 'script.pas' {Form8},
+  report in 'report.pas' {Form9},
+  ViewTheArchiveFromFile in 'ViewTheArchiveFromFile.pas' {FormArchFromFile};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TFormConfigurationSettings, FormConfigurationSettings);
+  Application.CreateForm(TForm3, Form3);
+  Application.CreateForm(TForm4, Form4);
+  Application.CreateForm(TForm6, Form6);
+  Application.CreateForm(TForm5, Form5);
+  Application.CreateForm(TForm8, Form8);
+  Application.CreateForm(TForm9, Form9);
+  Application.CreateForm(TFormArchFromFile, FormArchFromFile);
+  Application.Run;
+end.
