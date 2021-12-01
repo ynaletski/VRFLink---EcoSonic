@@ -59,27 +59,45 @@ end;
 //---------------------------------------------------//
 
 procedure TFormForReports.ViewArchiveTable;
-const name_glv:array[0..1]of string[20]=('Параметр','Дата/Время/Единицы');
-      str_evt:array[0..4]of string[30]=('Дата и время','Старое знач',
-             'Новое знач','Параметр/список или действие','Идентифик');
-      str_alm:array[0..3]of string[25]=('Дата и время',
+const
+name_glv:array[0..1]of string[20]=('Параметр','Дата/Время/Единицы');
+
+str_evt:array[0..4]of string[30]=('Дата и время','Старое знач',
+             'Новое знач','Параметр/список или действие','Идентификатор');
+
+str_alm:array[0..3]of string[25]=('Дата и время',
                       'Установка/сброс','Значение','Тип аларма');
+                      
 var i,j,size,num_rec,flg_res,num_str:integer;Year,Month,Day:word;
     dtCur:TDateTime;num_list,ind_ident:byte;
 begin
+  sgArchive.Width:=855;
+  sgArchive.DefaultColWidth:=100;
   sgArchive.RowHeights[0]:=sgArchive.DefaultRowHeight*2;
-  sgArchive.ColWidths[0]:=101;size:=0;ClearTable(sgArchive);
-  ClearTable(sgEvent);ClearTable(sgAlarm);
+  sgArchive.ColWidths[0]:=120;
+  size:=0;
+  ClearTable(sgArchive);
+  ClearTable(sgEvent);
+  ClearTable(sgAlarm);
   for i:=0 to Length(name_glv)-1 do sgArchive.Cells[0,i]:=name_glv[i];
   for i:=0 to Length(str_evt)-1 do sgEvent.Cells[i,0]:=str_evt[i];
   for i:=0 to Length(str_alm)-1 do sgAlarm.Cells[i,0]:=str_alm[i];
-  sgEvent.ColWidths[3]:=181;sgEvent.ColWidths[4]:=55;
-  sgAlarm.ColWidths[1]:=151;sgAlarm.ColWidths[3]:=191;
+  sgEvent.Width:=855;
+  sgEvent.DefaultColWidth:=155;
+  sgEvent.ColWidths[3]:=225;
+  sgEvent.ColWidths[0]:=120;
+  {sgEvent.ColWidths[4]:=150;}
+  sgAlarm.Width:=855;
+  sgAlarm.DefaultColWidth:=155;
+  sgAlarm.ColWidths[0]:=120;
+  {sgAlarm.ColWidths[1]:=155;}
+  sgAlarm.ColWidths[3]:=250;
   if clParamList.Items.Count>0 then for i:=0 to clParamList.Items.Count-1 do
   if (size<7)and(clParamList.Checked[i]) then
   begin
     sgArchive.Cells[size+1,0]:=clParamList.Items.Strings[i];
-    sgArchive.Cells[size+1,1]:=units_report[i];size:=size+1;
+    sgArchive.Cells[size+1,1]:=units_report[i];
+    size:=size+1;
   end;max_col:=size;
   case rgArchType.ItemIndex of
     0:
@@ -91,16 +109,22 @@ begin
     try
       DecodeDate(mcSelect.Date,Year,Month,Day);
       dtStart:=EncodeDate(Year,Month,1)+EncodeTime(contract,0,1,0);
-      Month:=Month+1;if Month>12 then begin Month:=1;Year:=Year+1;end;
+      Month:=Month+1;
+      if Month>12 then begin Month:=1;Year:=Year+1;end;
       dtStop:=EncodeDate(Year,Month,1)+EncodeTime(contract,0,0,0);
     except on EConvertError do Exit;end;
-  end;num_rec:=0;num_str:=0;
-  AssignFile(f_arc,namea);{$I-}Reset(f_arc);{$I+} flg_res:=IOResult;
+  end;
+  num_rec:=0;
+  num_str:=0;
+  AssignFile(f_arc,namea);
+  {$I-}Reset(f_arc);
+  {$I+} flg_res:=IOResult;
   if flg_res = 0 then
   begin
     while Eof(f_arc)=false do with d_arc do
     begin
-      Seek(f_arc,num_rec);Read(f_arc,d_arc);
+      Seek(f_arc,num_rec);
+      Read(f_arc,d_arc);
       if rgArchType.ItemIndex=a_type then
         if (a_time>dtStart)and(a_time<=dtStop)then
       begin
@@ -110,11 +134,18 @@ begin
         if (size<7)and(clParamList.Checked[i]) then
         begin
           sgArchive.Cells[size+1,num_str+sgArchive.FixedRows]:=
-          FloatToStrF(a_data[i],ffGeneral,6,5);size:=size+1;
-        end;num_str:=num_str+1;
-      end;num_rec:=num_rec+1;
-    end;CloseFile(f_arc);sgArchive.RowCount:=num_str+sgArchive.FixedRows+1;
-  end;max_data:=num_str;lCountData.Caption:=IntToStr(max_data);
+          FloatToStrF(a_data[i],ffGeneral,6,5);
+          size:=size+1;
+        end;
+        num_str:=num_str+1;
+      end;
+      num_rec:=num_rec+1;
+    end;
+    CloseFile(f_arc);
+    sgArchive.RowCount:=num_str+sgArchive.FixedRows+1;
+  end;
+  max_data:=num_str;
+  lCountData.Caption:=IntToStr(max_data);
 
   if max_data<=0 then
     begin
@@ -127,13 +158,18 @@ begin
       MainForm.MainMenu.Items.Items[7].Items[3].Enabled:=true;
     end;
 
-  sgArchive.FixedCols:=1;num_rec:=0;num_str:=0;
-  AssignFile(f_event,namet);{$I-}Reset(f_event);{$I+} flg_res:=IOResult;
+  sgArchive.FixedCols:=1;
+  num_rec:=0;
+  num_str:=0;
+  AssignFile(f_event,namet);
+  {$I-}Reset(f_event);
+  {$I+} flg_res:=IOResult;
   if flg_res = 0 then
   begin
     while Eof(f_event)=false do with d_event do
     begin
-      Seek(f_event,num_rec);Read(f_event,d_event);
+      Seek(f_event,num_rec);
+      Read(f_event,d_event);
       try
         dtCur:=EncodeDate(a_event[0]+2000,a_event[1],a_event[2])+
                EncodeTime(a_event[3],a_event[4],a_event[5],0);
@@ -148,27 +184,42 @@ begin
         sgEvent.Cells[4,num_str+sgEvent.FixedRows]:='Коммуник' else
         if ind_ident=16 then sgEvent.Cells[4,num_str+sgEvent.FixedRows]:='Терминал';
         num_str:=num_str+1;
-      end;num_rec:=num_rec+1;
-    end;CloseFile(f_event);sgEvent.RowCount:=num_str+sgEvent.FixedRows+1;
-  end;max_event:=num_str;lCountEvent.Caption:=IntToStr(max_event);
-  num_rec:=0;num_str:=0;
-  AssignFile(f_event,namer);{$I-}Reset(f_event);{$I+} flg_res:=IOResult;
+      end;
+      num_rec:=num_rec+1;
+    end;
+    CloseFile(f_event);
+    sgEvent.RowCount:=num_str+sgEvent.FixedRows+1;
+  end;
+  max_event:=num_str;
+  lCountEvent.Caption:=IntToStr(max_event);
+  num_rec:=0;
+  num_str:=0;
+  AssignFile(f_event,namer);
+  {$I-}Reset(f_event);
+  {$I+} flg_res:=IOResult;
   if flg_res = 0 then
   begin
     while Eof(f_event)=false do with d_event do
     begin
-      Seek(f_event,num_rec);Read(f_event,d_event);
+      Seek(f_event,num_rec);
+      Read(f_event,d_event);
       try
         dtCur:=EncodeDate(a_event[0]+2000,a_event[1],a_event[2])+
                EncodeTime(a_event[3],a_event[4],a_event[5],0);
-      except on EconvertError do;end;
+      except on EconvertError do;
+      end;
       if (dtCur>dtStart)and(dtCur<=dtStop)then
       begin
         FormForVariablesView.ViewOnAlarm(d_event.a_event,sgAlarm,num_str+sgAlarm.FixedRows,0);
         num_str:=num_str+1;
-      end;num_rec:=num_rec+1;
-    end;CloseFile(f_event);sgAlarm.RowCount:=num_str+sgAlarm.FixedRows+1;
-  end;max_alarm:=num_str;lCountAlarm.Caption:=IntToStr(max_alarm);
+      end;
+      num_rec:=num_rec+1;
+    end;
+    CloseFile(f_event);
+    sgAlarm.RowCount:=num_str+sgAlarm.FixedRows+1;
+  end;
+  max_alarm:=num_str;
+  lCountAlarm.Caption:=IntToStr(max_alarm);
 end;
 //---------------------------------------------------//
 
@@ -178,13 +229,16 @@ var str:string;
 begin
   if State=[gdSelected]then with sgArchive do
   begin
-    Canvas.Font.Color:=Font.Color;Canvas.Brush.Color:=Brush.Color;
-    str:=Cells[ACol,ARow];Canvas.FillRect(Rect);
+    Canvas.Font.Color:=Font.Color;
+    Canvas.Brush.Color:=Brush.Color;
+    str:=Cells[ACol,ARow];
+    Canvas.FillRect(Rect);
     Canvas.TextOut(Rect.Left+2,Rect.Top+2,str);
   end;
   if (State=[gdFixed])and(ARow=0)and(ACol>1) then with sgArchive do
   begin
-    FormForVariablesView.StrToStrings(Cells[ACol, ARow]);Canvas.FillRect(Rect);
+    FormForVariablesView.StrToStrings(Cells[ACol, ARow]);
+    Canvas.FillRect(Rect);
     case Length(str_massive)of
       1:
       Canvas.TextOut(Rect.Left+2,Rect.Top,str_massive[0]);
@@ -215,8 +269,10 @@ var str:string;
 begin
   if State=[gdSelected]then with sgEvent do
   begin
-    Canvas.Font.Color:=Font.Color;Canvas.Brush.Color:=Brush.Color;
-    str:=Cells[ACol,ARow];Canvas.FillRect(Rect);
+    Canvas.Font.Color:=Font.Color;
+    Canvas.Brush.Color:=Brush.Color;
+    str:=Cells[ACol,ARow];
+    Canvas.FillRect(Rect);
     Canvas.TextOut(Rect.Left+2,Rect.Top+2,str);
   end;
 end;

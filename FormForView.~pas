@@ -74,14 +74,22 @@ const head_str:array[0..1,0..1]of string[20]=(('','Параметр'),
 var i,j,col:integer;
 begin
   if (Length(Arch)=0)or(Length(ArchBasicSet)=0) then Exit;
-  ClearTable(sgTable);sgTable.RowCount:=3;
-  sgTable.Visible:=true;sgTable.FixedCols:=2;sgTable.FixedRows:=2;
-  sgTable.Color:=clWindow;sgTable.FixedColor:=$00D8E9EC;
-  sgTable.DefaultColWidth:=81;sgTable.ColWidths[0]:=35;col:=2;
-  sgTable.DefaultRowHeight:=19;sgTable.RowHeights[0]:=sgTable.DefaultRowHeight*2;
+  ClearTable(sgTable);
+  sgTable.RowCount:=3;
+  sgTable.Visible:=true;
+  sgTable.FixedCols:=2;
+  sgTable.FixedRows:=2;
+  sgTable.Color:=clWindow;
+  sgTable.FixedColor:=$00D8E9EC;
+  sgTable.DefaultColWidth:=85;
+  sgTable.ColWidths[0]:=35;
+  col:=2;
+  sgTable.DefaultRowHeight:=19;
+  sgTable.RowHeights[0]:=sgTable.DefaultRowHeight*2;
   bStep.Height:=sgTable.RowHeights[0];
   for i:=0 to Length(head_str)-1 do for j:=0 to Length(head_str[i])-1 do
-  sgTable.Cells[i,j]:=head_str[j,i];PRT.number_arc:=0;
+  sgTable.Cells[i,j]:=head_str[j,i];
+  PRT.number_arc:=0;
   if Length(Arch)>0 then for i:=0 to Length(Arch)-1 do 
   case Arch[i].pnt of
     1:for j:=0 to Length(ArchBasicSet)-1 do
@@ -93,8 +101,10 @@ begin
         sgTable.Cells[col,0]:=sgTable.Cells[col,0]+name_expand[Arch[i].offset];
         sgTable.Cells[col,0]:=sgTable.Cells[col,0]+pnt_str[Arch[i].logn];
         if ArchBasicSet[j].units<Length(units_all_bis) then
-        sgTable.Cells[col,1]:=units_all_bis[ArchBasicSet[j].units];col:=col+1;
-        PRT.number_arc:=PRT.number_arc+1;Break;
+        sgTable.Cells[col,1]:=units_all_bis[ArchBasicSet[j].units];
+        col:=col+1;
+        PRT.number_arc:=PRT.number_arc+1;
+        Break;
       end;
     2:for j:=0 to Length(ArchExpandSet)-1 do
       if Arch[i].num=ArchExpandSet[j].addr then
@@ -106,14 +116,22 @@ begin
         sgTable.Cells[col,0]:=sgTable.Cells[col,0]+' Доп';
         if ArchExpandSet[j].units<Length(units_all_bis) then
         sgTable.Cells[col,1]:=units_all_bis[ArchExpandSet[j].units];col:=col+1;
-        PRT.number_arc:=PRT.number_arc+1;Break;
+        PRT.number_arc:=PRT.number_arc+1;
+        Break;
       end;
   end;
-  sgTable.ColCount:=col;PRT.size_arc:=PRT.number_arc*4+7;
-  sgTable.Width:=780;sgTable.Height:=441;row:=2;PRT.count_str:=0;
-  bStep.Width:=sgTable.ColWidths[0];sgTable.ColWidths[1]:=109;
-  sgTable.ScrollBars:=ssBoth;Top:=MainForm.Top+75;Left:=MainForm.Left+8;
-  Autosize:=true;FormStyle:=fsStayOnTop;Visible:=true;
+  sgTable.ColCount:=col;
+  PRT.size_arc:=PRT.number_arc*4+7;
+  sgTable.Width:=1060;
+  sgTable.Height:=520;
+  row:=2;PRT.count_str:=0;
+  bStep.Width:=sgTable.ColWidths[0];
+  sgTable.ColWidths[1]:=100;
+  sgTable.ScrollBars:=ssBoth;
+  Top:=MainForm.Top+95;Left:=MainForm.Left+25;
+  Autosize:=true;
+  FormStyle:=fsStayOnTop;
+  Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -122,19 +140,35 @@ const str_evt:array[0..5]of string[30]=('№ зап.','Дата и время','Старое значение
              'Новое значение','Параметр/список или действие','Идентификатор');
 var i,j:byte;
 begin
-  ClearTable(sgTable);AutoScroll:=false;bStep.Visible:=true;
-  sgTable.Visible:=true;sgTable.Height:=441;
-  sgTable.FixedCols:=1;sgTable.Width:=771;
-  sgTable.FixedColor:=$00D8E9EC;sgTable.Color:=clWindow;
-  sgTable.Font.Style:=[];sgTable.Font.Size:=8;
-  sgTable.FixedRows:=1;sgTable.ScrollBars:=ssVertical;
-  sgTable.ColCount:=6;sgTable.RowCount:=2;row:=1;sgTable.DefaultRowHeight:=19;
-  sgTable.DefaultColWidth:=155;sgTable.ColWidths[0]:=35;
-  bStep.Height:=sgTable.RowHeights[0];bStep.Width:=sgTable.ColWidths[0];
-  sgTable.ColWidths[1]:=109;sgTable.ColWidths[4]:=205;sgTable.ColWidths[5]:=85;
+  ClearTable(sgTable);
+  AutoScroll:=false;
+  bStep.Visible:=true;
+  sgTable.Visible:=true;
+  sgTable.Height:=520;
+  sgTable.FixedCols:=1;
+  sgTable.Width:=850;
+  sgTable.FixedColor:=$00D8E9EC;
+  sgTable.Color:=clWindow;
+  sgTable.Font.Style:=[];
+  sgTable.Font.Size:=8;
+  sgTable.FixedRows:=1;
+  sgTable.ScrollBars:=ssVertical;
+  sgTable.ColCount:=6;sgTable.RowCount:=2;
+  row:=1;
+  sgTable.DefaultRowHeight:=19;
+  sgTable.DefaultColWidth:=160;
+  sgTable.ColWidths[0]:=35;
+  bStep.Height:=sgTable.RowHeights[0];
+  bStep.Width:=sgTable.ColWidths[0];
+  sgTable.ColWidths[1]:=115;
+  sgTable.ColWidths[4]:=215;
+  sgTable.ColWidths[5]:=90;
   for i:=0 to Length(str_evt)-1 do sgTable.Cells[i,0]:=str_evt[i];
-  AutoSize:=true;FormForVariablesView.Top:=MainForm.Top+75;FormForVariablesView.Left:=MainForm.Left+15;
-  FormForVariablesView.FormStyle:=fsStayOnTop;Visible:=true;
+  AutoSize:=true;
+  FormForVariablesView.Top:=MainForm.Top+95;
+  FormForVariablesView.Left:=MainForm.Left+25;
+  FormForVariablesView.FormStyle:=fsStayOnTop;
+  Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -143,18 +177,35 @@ const str_alm:array[0..4]of string[25]=('№ зап.','Дата и время',
                       'Установка/сброс','Значение','Тип аларма');
 var i,j:byte;
 begin
-  ClearTable(sgTable);AutoScroll:=false;bStep.Visible:=true;
-  sgTable.Visible:=true;sgTable.Height:=441;sgTable.Width:=641;
-  sgTable.FixedCols:=1;sgTable.FixedColor:=$00D8E9EC;sgTable.Color:=clWindow;
-  sgTable.Font.Style:=[];sgTable.Font.Size:=8;
-  sgTable.FixedRows:=1;sgTable.ScrollBars:=ssVertical;
-  sgTable.ColCount:=5;sgTable.RowCount:=2;row:=1;sgTable.DefaultRowHeight:=19;
-  sgTable.DefaultColWidth:=130;sgTable.ColWidths[0]:=35;
-  bStep.Height:=sgTable.RowHeights[0];bStep.Width:=sgTable.ColWidths[0];
-  sgTable.ColWidths[1]:=109;sgTable.ColWidths[4]:=215;
+  ClearTable(sgTable);
+  AutoScroll:=false;
+  bStep.Visible:=true;
+  sgTable.Visible:=true;
+  sgTable.Height:=520;
+  sgTable.Width:=850;
+  sgTable.FixedCols:=1;
+  sgTable.FixedColor:=$00D8E9EC;
+  sgTable.Color:=clWindow;
+  sgTable.Font.Style:=[];
+  sgTable.Font.Size:=8;
+  sgTable.FixedRows:=1;
+  sgTable.ScrollBars:=ssVertical;
+  sgTable.ColCount:=5;
+  sgTable.RowCount:=2;
+  row:=1;
+  sgTable.DefaultRowHeight:=19;
+  sgTable.DefaultColWidth:=130;
+  sgTable.ColWidths[0]:=35;
+  bStep.Height:=sgTable.RowHeights[0];
+  bStep.Width:=sgTable.ColWidths[0];
+  sgTable.ColWidths[1]:=109;
+  sgTable.ColWidths[4]:=215;
   for i:=0 to Length(str_alm)-1 do sgTable.Cells[i,0]:=str_alm[i];
-  AutoSize:=true;FormForVariablesView.Top:=MainForm.Top+75;FormForVariablesView.Left:=MainForm.Left+75;
-  FormForVariablesView.FormStyle:=fsStayOnTop;Visible:=true;
+  AutoSize:=true;
+  FormForVariablesView.Top:=MainForm.Top+95;
+  FormForVariablesView.Left:=MainForm.Left+25;
+  FormForVariablesView.FormStyle:=fsStayOnTop;
+  Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -163,18 +214,34 @@ const str_nst:array[0..3]of string[25]=('№ зап.','Дата и время',
                       'Установка/сброс','Тип нештатной ситуации');
 var i,j:byte;
 begin
-  ClearTable(sgTable);AutoScroll:=false;bStep.Visible:=true;
-  sgTable.Visible:=true;sgTable.Height:=441;sgTable.Width:=641;
-  sgTable.FixedCols:=1;sgTable.FixedColor:=$00D8E9EC;sgTable.Color:=clWindow;
-  sgTable.Font.Style:=[];sgTable.Font.Size:=8;
-  sgTable.FixedRows:=1;sgTable.ScrollBars:=ssVertical;
-  sgTable.ColCount:=Length(str_nst);sgTable.RowCount:=2;
-  row:=1;sgTable.DefaultRowHeight:=19;sgTable.DefaultColWidth:=130;
-  sgTable.ColWidths[0]:=35;sgTable.ColWidths[3]:=321;
-  bStep.Height:=sgTable.RowHeights[0];bStep.Width:=sgTable.ColWidths[0];
+  ClearTable(sgTable);
+  AutoScroll:=false;
+  bStep.Visible:=true;
+  sgTable.Visible:=true;
+  sgTable.Height:=520;
+  sgTable.Width:=700;
+  sgTable.FixedCols:=1;
+  sgTable.FixedColor:=$00D8E9EC;
+  sgTable.Color:=clWindow;
+  sgTable.Font.Style:=[];
+  sgTable.Font.Size:=8;
+  sgTable.FixedRows:=1;
+  sgTable.ScrollBars:=ssVertical;
+  sgTable.ColCount:=Length(str_nst);
+  sgTable.RowCount:=2;
+  row:=1;
+  sgTable.DefaultRowHeight:=19;
+  sgTable.DefaultColWidth:=130;
+  sgTable.ColWidths[0]:=35;
+  sgTable.ColWidths[3]:=321;
+  bStep.Height:=sgTable.RowHeights[0];
+  bStep.Width:=sgTable.ColWidths[0];
   for i:=0 to Length(str_nst)-1 do sgTable.Cells[i,0]:=str_nst[i];
-  AutoSize:=true;FormForVariablesView.Top:=MainForm.Top+75;FormForVariablesView.Left:=MainForm.Left+75;
-  FormForVariablesView.FormStyle:=fsStayOnTop;Visible:=true;
+  AutoSize:=true;
+  FormForVariablesView.Top:=MainForm.Top+95;
+  FormForVariablesView.Left:=MainForm.Left+25;
+  FormForVariablesView.FormStyle:=fsStayOnTop;
+  Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -234,8 +301,8 @@ begin
   AutoScroll:=false;
   if Length(Dyn)=0 then Exit;ClearTable(sgTable);sgTable.FixedColor:=$00D8E9EC;
   sgTable.ColCount:=Length(name_mtr);sgTable.RowCount:=Length(Dyn)+1;
-  sgTable.DefaultColWidth:=101;sgTable.Color:=$00D8E9EC;sgTable.Height:=421;
-  sgTable.ColWidths[0]:=201;sgTable.FixedCols:=1;sgTable.FixedRows:=1;j:=0;
+  sgTable.DefaultColWidth:=100;sgTable.Color:=$00D8E9EC;sgTable.Height:=500;
+  sgTable.ColWidths[0]:=200;sgTable.FixedCols:=1;sgTable.FixedRows:=1;j:=0;
   sgTable.ScrollBars:=ssVertical;
   for i:=0 to sgTable.ColCount-1 do
     begin j:=j+sgTable.ColWidths[i];sgTable.Cells[i,0]:=name_mtr[i];end;
@@ -248,7 +315,7 @@ begin
       s:=dyn_all[Dyn[i].name]+name_expand_oil[Dyn[i].size];
     if Dyn[i].units<=Length(units_all) then s:=s+units_all[Dyn[i].units];
     sgTable.Cells[0,i+1]:=s;
-  end;AutoSize:=true;Top:=MainForm.Top+75;Left:=MainForm.Left+75;
+  end;AutoSize:=true;Top:=MainForm.Top+95;Left:=MainForm.Left+25;
   FormStyle:=fsStayOnTop;Visible:=true;
 end;
 //---------------------------------------------------//
@@ -274,7 +341,7 @@ begin
   begin
     if DynExp[i].typ=2 then k:=DynExp[i].size else k:=1; j:=j+k;
   end; j:=Floor(j/3)+1; sgTable.RowCount:=j+1;
-  sgTable.DefaultColWidth:=99; sgTable.Color:=$00D8E9EC;
+  sgTable.DefaultColWidth:=100; sgTable.Color:=$00D8E9EC;
   sgTable.FixedCols:=0; sgTable.FixedRows:=1; j:=0;
   for i:=0 to sgTable.ColCount-1 do
     begin j:=j+sgTable.ColWidths[i]; sgTable.Cells[i,0]:=name_mtr[i];end;
@@ -294,7 +361,7 @@ begin
       sgTable.Cells[num_col[k],n+1]:=s+IntToStr(j+1);
       IncrementTable(k,n);
     end;
-  end;Top:=MainForm.Top+75;Left:=MainForm.Left+75;FormStyle:=fsStayOnTop;Visible:=true;
+  end;Top:=MainForm.Top+95;Left:=MainForm.Left+25;FormStyle:=fsStayOnTop;Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -744,13 +811,18 @@ begin
     if recive[10]=1 then PRT.flg_end:=true else PRT.flg_end:=false;
   end;
 end;
+//---------------------------------------------------//
+
 procedure TFormForVariablesView.ClearTable(sg:TStringGrid);
 var i,j:word;
 begin
   for i:=0 to sg.ColCount-1 do for j:=0 to sg.RowCount-1 do sg.Cells[i,j]:=' ';
 end;
+//---------------------------------------------------//
+
 procedure TFormForVariablesView.FormClose(Sender: TObject; var Action: TCloseAction);
 begin MainForm.CloseAllWnd;end;
+//---------------------------------------------------//
 
 procedure TFormForVariablesView.sgTableDrawCell(Sender: TObject; ACol, ARow: Integer;
   Rect: TRect; State: TGridDrawState);
@@ -797,6 +869,7 @@ begin
     sgTable.Canvas.TextOut(Rect.Left+6,Rect.Top+2,sgTable.Cells[ACol,ARow]);
   end;
 end;
+//---------------------------------------------------//
 
 procedure TFormForVariablesView.bSaveClick(Sender: TObject);
 var str:string;i,j:integer;
@@ -815,6 +888,7 @@ begin
     end;List.SaveToFile(sFile);
   finally list.Free;end;
 end;
+//---------------------------------------------------//
 
 procedure TFormForVariablesView.FormCreate(Sender: TObject);
 begin
@@ -822,6 +896,7 @@ begin
   bStep.Glyph:=Image1.Picture.Bitmap;bStep.OnClick:=GoStep;bStep.Visible:=false;
   bStep.Hint:='Подгрузка более ранних архивных записей';bStep.ShowHint:=true;
 end;
+//---------------------------------------------------//
 
 procedure TFormForVariablesView.GoStep(Sender: TObject);
 begin
@@ -835,10 +910,12 @@ begin
   end; PRT.flg_end:=false;
   MainForm.StatusBar.Panels.Items[0].Width:=MainForm.Width;cbStatus.Visible:=false;
 end;
+//---------------------------------------------------//
 
 procedure TFormForVariablesView.FormResize(Sender: TObject);
 begin
   bStep.Left:=sgTable.Left;bStep.Top:=sgTable.Top;
 end;
+//---------------------------------------------------//
 
 end.

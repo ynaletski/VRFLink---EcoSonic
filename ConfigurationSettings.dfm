@@ -1,6 +1,6 @@
 object FormConfigurationSettings: TFormConfigurationSettings
-  Left = 334
-  Top = 347
+  Left = 194
+  Top = 206
   BorderStyle = bsDialog
   Caption = #1050#1086#1085#1092#1080#1075#1091#1088#1072#1094#1080#1086#1085#1085#1099#1077' '#1091#1089#1090#1072#1085#1086#1074#1082#1080
   ClientHeight = 540
@@ -103,7 +103,7 @@ object FormConfigurationSettings: TFormConfigurationSettings
             Top = 24
             Width = 191
             Height = 154
-            Date = 38570.715902280090000000
+            Date = 38570.646019618060000000
             TabOrder = 2
             OnClick = MonthCalendar1Click
           end

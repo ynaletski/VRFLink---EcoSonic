@@ -1,10 +1,10 @@
 object FormForScript: TFormForScript
-  Left = 207
-  Top = 222
+  Left = 218
+  Top = 166
   BorderStyle = bsDialog
   Caption = #1057#1082#1088#1080#1087#1090' '#1080#1085#1090#1077#1088#1087#1088#1077#1090#1072#1090#1086#1088#1072' '#1082#1086#1084#1072#1085#1076
-  ClientHeight = 432
-  ClientWidth = 632
+  ClientHeight = 516
+  ClientWidth = 784
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,15 +19,15 @@ object FormForScript: TFormForScript
   object pScript: TPanel
     Left = 0
     Top = 0
-    Width = 630
-    Height = 441
+    Width = 780
+    Height = 520
     BevelOuter = bvNone
     TabOrder = 0
     object sgScript: TStringGrid
       Left = 0
       Top = 0
-      Width = 629
-      Height = 399
+      Width = 770
+      Height = 480
       ColCount = 6
       DefaultRowHeight = 19
       FixedColor = 14215660
@@ -39,7 +39,7 @@ object FormForScript: TFormForScript
     end
     object bSaveDev: TBitBtn
       Left = 40
-      Top = 404
+      Top = 485
       Width = 121
       Height = 25
       Hint = #1057#1086#1093#1088#1072#1085#1077#1085#1080#1077' '#1074' '#1101#1085#1077#1088#1075#1086#1085#1077#1079#1072#1074#1080#1089#1080#1084#1086#1081' '#1087#1072#1084#1103#1090#1080' '#1082#1086#1085#1090#1088#1086#1083#1083#1077#1088#1072
@@ -65,7 +65,7 @@ object FormForScript: TFormForScript
     end
     object bSaveFile: TBitBtn
       Left = 184
-      Top = 404
+      Top = 485
       Width = 121
       Height = 25
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100'!'
@@ -87,8 +87,8 @@ object FormForScript: TFormForScript
       NumGlyphs = 2
     end
     object BitBtn1: TBitBtn
-      Left = 440
-      Top = 404
+      Left = 450
+      Top = 485
       Width = 115
       Height = 25
       Caption = #1059#1076#1072#1083#1080#1090#1100' '#1084#1077#1090#1082#1080'!'

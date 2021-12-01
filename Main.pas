@@ -1899,10 +1899,10 @@ begin
       end;
       //for i:=0 to Length(num_item_conf)-1 do for j:=0 to 4 do ShowMessage(IntToStr(num_item_conf[i,j]));
       MainForm.StatusBar.Visible:=true;
-      MainForm.Panel2.Width:=800;MainForm.Panel2.Height:=510;MainForm.Panel2.Left:=2;
+      MainForm.Panel2.Width:=1100;MainForm.Panel2.Height:=690;MainForm.Panel2.Left:=2;
       MainForm.pCommunic.Visible:=false;MainForm.Panel2.Visible:=true;
-      MainForm.Top:=0;MainForm.Left:=0;MainForm.Width:=800;MainForm.Height:=575;
-      FormConfigurationSettings.Top:=MainForm.Top+105;FormConfigurationSettings.Left:=MainForm.Left+75; MainForm.ToolBar1.Visible:=true;
+      {MainForm.Top:=0;MainForm.Left:=0;}MainForm.Width:=1120;MainForm.Height:=700;
+      FormConfigurationSettings.Top:=MainForm.Top+90;FormConfigurationSettings.Left:=MainForm.Left+17; MainForm.ToolBar1.Visible:=true;
       for i:=1 to MainForm.MainMenu.Items.Count-1 do
       MainForm.MainMenu.Items.Items[i].Visible:=true;
       MainForm.MainMenu.Items.Items[0].Enabled:=false;
@@ -2593,7 +2593,7 @@ M: Screen.Cursor:=crDefault;
    begin
      MainForm.PCommunic.Visible:=true;MainForm.CloseAllWnd;MainForm.Panel2.Visible:=false;
      EnableStatusMessage;StatusBar.Panels.Items[0].Style:=psText;
-     FormConfigurationSettings.Close;MainForm.Width:=640;MainForm.Height:=421;bLink.Enabled:=true;
+     FormConfigurationSettings.Close;MainForm.Width:=1120;MainForm.Height:=700;bLink.Enabled:=true;
      for i:=0 to MainMenu.Items.Count-1 do
      MainMenu.Items.Items[i].Visible:=false;cbStatus.Visible:=false;
      MainMenu.Items.Items[0].Visible:=true;ToolBar1.Visible:=false;
@@ -3139,7 +3139,9 @@ begin LoadArchive('Журнал нештатных ситуаций вычислителя',5);end;
 
 procedure TMainForm.LoadInterface(name_arch:string;typ:byte);
 begin {запускает процесс загрузки архивов или журналов}
-  FormModbusSetting.Caption:=name_arch;CloseAllWnd;PRT.flg_first:=true;
+  FormModbusSetting.Caption:=name_arch;
+  CloseAllWnd;
+  PRT.flg_first:=true;
   case typ of
     0:begin
         ModbusConf.select:=2;
@@ -3153,7 +3155,8 @@ begin {запускает процесс загрузки архивов или журналов}
       end;
     2:Prt.status:=twModbusScale;
     3:Prt.status:=twModbusStatus;
-  end;flg_cmd:=30;
+  end;
+  flg_cmd:=30;
 end;
 //---------------------------------------------------//
 
@@ -3163,7 +3166,9 @@ begin LoadInterface('Шкалы преобразования Modbus',2);end;
 
 procedure TMainForm.N22Click(Sender: TObject);
 begin
-  FormForScript.ViewNewTable;FormForScript.Caption:='Новый скрипт';FormForScript.Visible:=true;
+  FormForScript.ViewNewTable;
+  FormForScript.Caption:='Новый скрипт';
+  FormForScript.Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -3292,8 +3297,11 @@ procedure TMainForm.N30Click(Sender: TObject);
 var i,j,index:integer;
 begin
   MainForm.CloseAllWnd;
-  FormForReports.rgArchType.ItemIndex:=0;FormForReports.Top:=MainForm.Top+75;FormForReports.Left:=MainForm.Left+8;
-  FormForReports.clParamList.Clear;SetLength(units_report,0);
+  FormForReports.rgArchType.ItemIndex:=0;
+  FormForReports.Top:=MainForm.Top+95;
+  FormForReports.Left:=MainForm.Left+15;
+  FormForReports.clParamList.Clear;
+  SetLength(units_report,0);
   if Length(Arch)>0 then
     for i:=0 to Length(Arch)-1 do
     case Arch[i].pnt of

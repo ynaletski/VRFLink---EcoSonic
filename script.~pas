@@ -85,7 +85,8 @@ begin
         if Dyn[i].size<size then if Typ_task<>6 then
         s:=s+name_expand[Dyn[i].size]else s:=s+name_expand_oil[Dyn[i].size];
         cb.Items.Add(s);
-        SetLength(num_param,cb.Items.Count);flg_prm:=true;
+        SetLength(num_param,cb.Items.Count);
+        flg_prm:=true;
         num_param[cb.Items.Count-1]:=Dyn[i].addr+Dyn[i].size;
       end;
       if flg_prm then flag:=true else Exit;
@@ -166,7 +167,8 @@ begin
   begin
     {ShowMessage('номер записи:'+IntToStr(i)); ShowMessage('код:'+IntToStr(ScriptData[i].op_code));
           ShowMessage('переход:'+IntToStr(ScriptData[i].transit)); }
-    sgScript.Cells[0,i+1]:=IntToStr(i+1); flg:=false;
+    sgScript.Cells[0,i+1]:=IntToStr(i+1);
+    flg:=false;
     if ScriptData[i].op_code<Length(code_script)then
     sgScript.Cells[2,i+1]:=code_script[ScriptData[i].op_code]else
     sgScript.Cells[2,i+1]:='';
@@ -210,14 +212,18 @@ end;
 procedure TFormForScript.ViewNewTable;
 var i:integer;
 begin
-  sgScript.ColCount:=Length(name_col);sgScript.DefaultColWidth:=101;
-  sgScript.ColWidths[0]:=81;sgScript.ColWidths[1]:=81;
-  sgScript.ColWidths[2]:=141;
-  sgScript.ColWidths[4]:=107;sgScript.ColWidths[5]:=81;
+  sgScript.ColCount:=Length(name_col);
+  sgScript.DefaultColWidth:=110;
+  sgScript.ColWidths[0]:=81;
+  sgScript.ColWidths[1]:=85;
+  sgScript.ColWidths[2]:=160;
+  sgScript.ColWidths[4]:=110;
+  sgScript.ColWidths[5]:=100;
   for i:=0 to Length(name_col)-1 do sgScript.Cells[i,0]:=name_col[i];
   for i:=1 to sgScript.RowCount-1 do sgScript.Cells[0,i]:=IntToStr(i);
   SetLength(ScriptData,sgScript.RowCount-1);
-  FormForScript.Top:=MainForm.Top+75;FormForScript.Left:=MainForm.Left+75;
+  FormForScript.Top:=MainForm.Top+95;
+  FormForScript.Left:=MainForm.Left+25;
 end;
 //---------------------------------------------------//
 
@@ -494,5 +500,6 @@ begin
     ScriptData[i].transit:=0;
   end;
 end;
+//---------------------------------------------------//
 
 end.

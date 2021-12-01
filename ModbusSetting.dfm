@@ -3,7 +3,7 @@ object FormModbusSetting: TFormModbusSetting
   Top = 315
   BorderStyle = bsDialog
   Caption = 'FormModbusSetting'
-  ClientHeight = 331
+  ClientHeight = 530
   ClientWidth = 703
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -52,7 +52,7 @@ object FormModbusSetting: TFormModbusSetting
     Left = 0
     Top = 0
     Width = 721
-    Height = 361
+    Height = 530
     BevelOuter = bvNone
     TabOrder = 0
     Visible = False
@@ -295,7 +295,7 @@ object FormModbusSetting: TFormModbusSetting
     Left = 0
     Top = 0
     Width = 315
-    Height = 361
+    Height = 530
     BevelOuter = bvNone
     TabOrder = 2
     Visible = False
@@ -303,7 +303,7 @@ object FormModbusSetting: TFormModbusSetting
       Left = 8
       Top = 8
       Width = 295
-      Height = 345
+      Height = 520
       ColCount = 2
       DefaultColWidth = 121
       DefaultRowHeight = 19
@@ -312,6 +312,38 @@ object FormModbusSetting: TFormModbusSetting
       ScrollBars = ssVertical
       TabOrder = 0
       OnDrawCell = sgStatusDrawCell
+      RowHeights = (
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19)
     end
   end
 end

@@ -107,19 +107,23 @@ begin
   twModbusFunc:
   begin
     try ModbusFunc[tab_row-1].addr:=StrToInt(eStruct.Text);
-    except on EConvertError do flag:=true;end;
+    except on EConvertError do flag:=true;
+    end;
     if flag=false then sgTable.Cells[tab_col,tab_row]:=eStruct.Text;
   end;
   twModbusHost:
   begin
     try value:=StrToInt(eStruct.Text);
-    except on EConvertError do flag:=true;end;
+    except on EConvertError do flag:=true;
+    end;
     if flag=false then
     begin
       sgTableHost.Cells[tab_col,tab_row]:=eStruct.Text;
       case tab_col of
-        1:ModbusHost[tab_row-1].addr:=value;2:ModbusHost[tab_row-1].func:=value;
-        3:ModbusHost[tab_row-1].reg:=value;4:ModbusHost[tab_row-1].new:=value;
+        1:ModbusHost[tab_row-1].addr:=value;
+        2:ModbusHost[tab_row-1].func:=value;
+        3:ModbusHost[tab_row-1].reg:=value;
+        4:ModbusHost[tab_row-1].new:=value;
         5:ModbusHost[tab_row-1].count:=value;
       end;
     end;
@@ -127,17 +131,21 @@ begin
   twModbusScale:
   begin
     try val_float:=StrToFloat(eStruct.Text);
-    except on EConvertError do flag:=true;end;
+    except on EConvertError do flag:=true;
+    end;
     if flag=false then
     begin
       sgScale.Cells[tab_col,tab_row]:=eStruct.Text;
       case tab_col of
         1:ModbusScale[tab_row-1].lo_val:=val_float;
         2:ModbusScale[tab_row-1].hi_val:=val_float;
-      end;BitBtn2.Enabled:=true;
+      end;
+      BitBtn2.Enabled:=true;
     end;
-  end;end;
-  if flag then ShowMessage('Неправильный ввод числа!');eStruct.Visible:=false;
+  end;
+  end;
+  if flag then ShowMessage('Неправильный ввод числа!');
+  eStruct.Visible:=false;
   flag_view:=cvOff;
 end;
 //---------------------------------------------------//
@@ -182,19 +190,38 @@ const str_modbus:array[0..5]of string[20]=('№ зап.','Адрес регистра',
       'Номер точки','Логический','Номер параметра','Способ преобраз.');
 var i:byte;
 begin
-  flag_view:=cvOff;sgTableHost.Visible:=false;sgTable.Visible:=true;
-  cbSelFunc.Clear;FormForVariablesView.ClearTable(sgTable);cbSelFunc.Visible:=true;
+  flag_view:=cvOff;
+  sgTableHost.Visible:=false;
+  sgTable.Visible:=true;
+  cbSelFunc.Clear;
+  FormForVariablesView.ClearTable(sgTable);
+  cbSelFunc.Visible:=true;
   for i:=0 to Length(str_func)-1 do cbSelFunc.Items.Add(str_func[i]);
-  Label1.Caption:='Функция';Label1.Visible:=true;pScale.Visible:=false;
-  sgTable.ColCount:=Length(str_modbus);sgTable.RowCount:=41;row:=1;
-  sgTable.DefaultRowHeight:=19;sgTable.DefaultColWidth:=101;
-  sgTable.ColWidths[0]:=41;sgTable.ColWidths[3]:=85;sgTable.ColWidths[4]:=171;
-  sgTable.ColWidths[5]:=191;pHostStatus.Visible:=false;
-  cbSelFunc.ItemIndex:=0;pTable.Height:=441;sgTable.Height:=399;pTable.Visible:=true;
+  Label1.Caption:='Функция';
+  Label1.Visible:=true;
+  pScale.Visible:=false;
+  sgTable.ColCount:=Length(str_modbus);
+  sgTable.RowCount:=41;
+  row:=1;
+  sgTable.DefaultRowHeight:=19;
+  sgTable.DefaultColWidth:=101;
+  sgTable.ColWidths[0]:=41;
+  sgTable.ColWidths[3]:=85;
+  sgTable.ColWidths[4]:=171;
+  sgTable.ColWidths[5]:=191;
+  pHostStatus.Visible:=false;
+  cbSelFunc.ItemIndex:=0;
+  pTable.Height:=520;
+  sgTable.Height:=480;
+  pTable.Visible:=true;
   for i:=0 to Length(str_modbus)-1 do sgTable.Cells[i,0]:=str_modbus[i];
   for i:=1 to sgTable.RowCount-1 do sgTable.Cells[0,i]:=IntToStr(i);
-  AutoSize:=true;Top:=MainForm.Top+75;Left:=MainForm.Left+25;FormStyle:=fsStayOnTop;
-  bSetModbus.Enabled:=false;Visible:=true;
+  AutoSize:=true;
+  Top:=MainForm.Top+95;
+  Left:=MainForm.Left+25;
+  FormStyle:=fsStayOnTop;
+  bSetModbus.Enabled:=false;
+  Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -204,18 +231,36 @@ const str_modbus:array[0..6]of string[20]=('№ зап.','Адрес устройства',
         'Статус');
 var i:byte;
 begin
-  cbSelFunc.Clear;FormForVariablesView.ClearTable(sgTableHost);cbSelFunc.Visible:=true;
-  cbSelFunc.Items.Add(str_host[0]);flag_view:=cvOff;pTable.Visible:=true;
-  sgTable.Visible:=false;pScale.Visible:=false;pHostStatus.Visible:=false;
-  Label1.Caption:='Страница';sgTableHost.Visible:=true;Label1.Visible:=true;
-  sgTableHost.ColCount:=Length(str_modbus);sgTableHost.RowCount:=31;row:=1;
-  sgTableHost.DefaultRowHeight:=19;sgTableHost.DefaultColWidth:=95;
-  sgTableHost.ColWidths[0]:=41;cbSelFunc.ItemIndex:=0;pTable.Height:=441;
-  sgTableHost.Height:=399;sgTableHost.ColWidths[6]:=81;
+  cbSelFunc.Clear;
+  FormForVariablesView.ClearTable(sgTableHost);
+  cbSelFunc.Visible:=true;
+  cbSelFunc.Items.Add(str_host[0]);
+  flag_view:=cvOff;
+  pTable.Visible:=true;
+  sgTable.Visible:=false;
+  pScale.Visible:=false;
+  pHostStatus.Visible:=false;
+  Label1.Caption:='Страница';
+  sgTableHost.Visible:=true;
+  Label1.Visible:=true;
+  sgTableHost.ColCount:=Length(str_modbus);
+  sgTableHost.RowCount:=31;
+  row:=1;
+  sgTableHost.DefaultRowHeight:=19;
+  sgTableHost.DefaultColWidth:=95;
+  sgTableHost.ColWidths[0]:=41;
+  cbSelFunc.ItemIndex:=0;
+  pTable.Height:=520;
+  sgTableHost.Height:=480;
+  sgTableHost.ColWidths[6]:=81;
   for i:=0 to Length(str_modbus)-1 do sgTableHost.Cells[i,0]:=str_modbus[i];
   for i:=1 to sgTableHost.RowCount-1 do sgTableHost.Cells[0,i]:=IntToStr(i);
-  AutoSize:=true;Top:=MainForm.Top+75;Left:=MainForm.Left+75;FormStyle:=fsStayOnTop;
-  bSetModbus.Enabled:=false;Visible:=true;
+  AutoSize:=true;
+  Top:=MainForm.Top+95;
+  Left:=MainForm.Left+25;
+  FormStyle:=fsStayOnTop;
+  bSetModbus.Enabled:=false;
+  Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -224,15 +269,25 @@ const str_modbus:array[0..2]of string[20]=('Номер шкалы','Нижнее значение',
         'Верхнее значение');
 var i:byte;
 begin
-  FormForVariablesView.ClearTable(sgScale);flag_view:=cvOff;pTable.Visible:=false;
-  sgScale.ColCount:=Length(str_modbus);sgScale.RowCount:=9;row:=1;
-  BitBtn2.Enabled:=false;pHostStatus.Visible:=false;
-  sgScale.DefaultRowHeight:=19;sgScale.DefaultColWidth:=101;
+  FormForVariablesView.ClearTable(sgScale);
+  flag_view:=cvOff;
+  pTable.Visible:=false;
+  sgScale.ColCount:=Length(str_modbus);
+  sgScale.RowCount:=9;
+  row:=1;
+  BitBtn2.Enabled:=false;
+  pHostStatus.Visible:=false;
+  sgScale.DefaultRowHeight:=19;
+  sgScale.DefaultColWidth:=101;
   for i:=0 to Length(str_modbus)-1 do sgScale.Cells[i,0]:=str_modbus[i];
   for i:=1 to sgScale.RowCount-1 do sgScale.Cells[0,i]:=IntToStr(i);
   pScale.Visible:=true;
-  FormStyle:=fsStayOnTop;bSetModbus.Enabled:=false;AutoSize:=true;
-  Top:=MainForm.Top+75;Left:=MainForm.Left+150;Visible:=true;
+  FormStyle:=fsStayOnTop;
+  bSetModbus.Enabled:=false;
+  AutoSize:=true;
+  Top:=MainForm.Top+95;
+  Left:=MainForm.Left+25;
+  Visible:=true;
 end;
 //---------------------------------------------------//
 
@@ -240,12 +295,18 @@ procedure TFormModbusSetting.ViewWndModbusStatus;
 const str_modbus:array[0..1]of string[20]=('№ запроса','Статус запроса');
 var i:byte;
 begin
-  pTable.Visible:=false;pScale.Visible:=false;pHostStatus.Visible:=true;
-  sgStatus.ColWidths[0]:=61;sgStatus.ColWidths[1]:=209;
+  pTable.Visible:=false;
+  pScale.Visible:=false;
+  pHostStatus.Visible:=true;
+  sgStatus.ColWidths[0]:=61;
+  sgStatus.ColWidths[1]:=209;
   for i:=0 to Length(str_modbus)-1 do sgStatus.Cells[i,0]:=str_modbus[i];
   for i:=1 to sgStatus.RowCount-1 do sgStatus.Cells[0,i]:=IntToStr(i);
-  FormStyle:=fsStayOnTop;AutoSize:=true;Top:=MainForm.Top+75;
-  Left:=MainForm.Left+150;Visible:=true;
+  FormStyle:=fsStayOnTop;
+  AutoSize:=true;
+  Top:=MainForm.Top+95;
+  Left:=MainForm.Left+25;
+  Visible:=true;
 end;
 //---------------------------------------------------//
 

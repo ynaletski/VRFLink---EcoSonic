@@ -312,6 +312,38 @@ object FormModbusSetting: TFormModbusSetting
       ScrollBars = ssVertical
       TabOrder = 0
       OnDrawCell = sgStatusDrawCell
+      RowHeights = (
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19
+        19)
     end
   end
 end

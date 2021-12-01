@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 203
-  Top = 204
+  Left = 183
+  Top = 123
   AutoScroll = False
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = '( VRFLINK - EcoSonic ) '#1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1074#1099#1095#1080#1089#1083#1080#1090#1077#1083#1077#1081' '#1088#1072#1089#1093#1086#1076#1072
@@ -22,8 +22,8 @@ object MainForm: TMainForm
   object PCommunic: TPanel
     Left = 0
     Top = 2
-    Width = 621
-    Height = 351
+    Width = 1089
+    Height = 607
     BevelOuter = bvNone
     TabOrder = 0
     Visible = False
@@ -611,23 +611,23 @@ object MainForm: TMainForm
       end
       item
         Style = psOwnerDraw
-        Width = 250
+        Width = 210
       end
       item
         Style = psOwnerDraw
-        Width = 80
+        Width = 100
       end
       item
         Style = psOwnerDraw
-        Width = 80
+        Width = 100
       end
       item
         Style = psOwnerDraw
-        Width = 80
+        Width = 100
       end
       item
         Style = psOwnerDraw
-        Width = 80
+        Width = 100
       end>
     OnDrawPanel = StatusBarDrawPanel
   end

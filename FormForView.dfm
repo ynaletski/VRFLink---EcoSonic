@@ -1,10 +1,10 @@
 object FormForVariablesView: TFormForVariablesView
-  Left = 332
-  Top = 336
+  Left = 214
+  Top = 197
   BorderStyle = bsDialog
   Caption = 'FormForVariablesView'
-  ClientHeight = 331
-  ClientWidth = 622
+  ClientHeight = 551
+  ClientWidth = 1056
   Color = clBtnFace
   DragMode = dmAutomatic
   Font.Charset = DEFAULT_CHARSET
@@ -42,8 +42,8 @@ object FormForVariablesView: TFormForVariablesView
   object sgTable: TStringGrid
     Left = 0
     Top = 0
-    Width = 610
-    Height = 331
+    Width = 1050
+    Height = 553
     BorderStyle = bsNone
     ColCount = 4
     DefaultColWidth = 128

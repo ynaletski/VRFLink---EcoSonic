@@ -1,11 +1,11 @@
 object FormForReports: TFormForReports
-  Left = 182
-  Top = 554
+  Left = 192
+  Top = 210
   AutoScroll = False
   AutoSize = True
   Caption = #1055#1086#1076#1075#1086#1090#1086#1074#1082#1072' '#1086#1090#1095#1105#1090#1072
-  ClientHeight = 451
-  ClientWidth = 777
+  ClientHeight = 525
+  ClientWidth = 1070
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object FormForReports: TFormForReports
   object pRaport: TPanel
     Left = 0
     Top = 0
-    Width = 777
-    Height = 451
+    Width = 1070
+    Height = 525
     BevelOuter = bvNone
     TabOrder = 0
     object rgArchType: TRadioGroup
@@ -40,7 +40,7 @@ object FormForReports: TFormForReports
       Top = 8
       Width = 191
       Height = 154
-      Date = 37996.715903900460000000
+      Date = 37996.792007129630000000
       TabOrder = 1
       OnClick = mcSelectClick
     end
@@ -56,8 +56,8 @@ object FormForReports: TFormForReports
     object sgArchive: TStringGrid
       Left = 208
       Top = 8
-      Width = 567
-      Height = 301
+      Width = 857
+      Height = 337
       Hint = #1058#1072#1073#1083#1080#1094#1072' '#1072#1088#1093#1080#1074#1085#1099#1093' '#1079#1072#1087#1080#1089#1077#1081' '#1079#1072' '#1086#1090#1095#1105#1090#1085#1099#1081' '#1087#1077#1088#1080#1086#1076
       ColCount = 8
       DefaultColWidth = 69
@@ -71,9 +71,9 @@ object FormForReports: TFormForReports
     end
     object sgEvent: TStringGrid
       Left = 208
-      Top = 315
-      Width = 567
-      Height = 63
+      Top = 352
+      Width = 857
+      Height = 82
       Hint = #1058#1072#1073#1083#1080#1094#1072' '#1089#1086#1073#1099#1090#1080#1081' '#1079#1072' '#1086#1090#1095#1105#1090#1085#1099#1081' '#1087#1077#1088#1080#1086#1076
       DefaultColWidth = 101
       DefaultRowHeight = 19
@@ -86,9 +86,9 @@ object FormForReports: TFormForReports
     end
     object sgAlarm: TStringGrid
       Left = 208
-      Top = 384
-      Width = 567
-      Height = 63
+      Top = 440
+      Width = 857
+      Height = 79
       Hint = #1058#1072#1073#1083#1080#1094#1072' '#1072#1083#1072#1088#1084#1086#1074' '#1079#1072' '#1086#1090#1095#1105#1090#1085#1099#1081' '#1087#1077#1088#1080#1086#1076
       ColCount = 4
       DefaultColWidth = 101
